@@ -218,7 +218,6 @@
         [view addSubview:searchBgView];
         
         [searchBgView makeConstraints:^(MASConstraintMaker *make) {
-            make.size.equalTo(view.frame.size);
             make.left.equalTo(view.left);
             make.right.equalTo(view.right);
             make.top.equalTo(view.top);
