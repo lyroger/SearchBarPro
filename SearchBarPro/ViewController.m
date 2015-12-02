@@ -36,8 +36,31 @@
 
 - (void)loadSubView
 {
-    dataArray = @[@"第一行",@"第二行",@"第三行",@"第四行",@"第五行"];
-    searchDataArray = @[@"搜索第一行",@"搜索第二行",@"搜索第三行",@"搜索第四行",@"搜索第五行"];
+//    dataArray = @[@"第一行",@"第二行",@"第三行",@"第四行",@"第五行"];
+    dataArray = @[];
+    searchDataArray = @[@"搜索第一行"];
+    
+    if (!self.tempSearchDisplayBackgroungView) {
+        self.tempSearchDisplayBackgroungView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mScreenWidth, mScreenHeight)];
+        self.tempSearchDisplayBackgroungView.backgroundColor = [UIColor whiteColor];
+        self.tempSearchDisplayBackgroungView.tag = 99;
+        self.tempSearchDisplayBackgroungView.userInteractionEnabled = NO;
+        
+        NSString *tips = @"搜索更多的内容";
+        CGSize font = [tips sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20]}];
+        UILabel *labelTips = [[UILabel alloc] initWithFrame:CGRectMake((mScreenWidth-font.width)/2, 50, font.width, font.height)];
+        labelTips.font = [UIFont systemFontOfSize:20];
+        labelTips.text = tips;
+        labelTips.textColor = [UIColor colorWithWhite:0 alpha:0.5];
+        [self.tempSearchDisplayBackgroungView addSubview:labelTips];
+        
+        CALayer *line = [CALayer layer];
+        line.frame = CGRectMake(labelTips.frame.origin.x-30, labelTips.frame.origin.y+labelTips.frame.size.height+15, font.width+30*2, 0.5);
+        line.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2].CGColor;
+        line.opacity = 0.5;
+        [self.tempSearchDisplayBackgroungView.layer addSublayer:line];
+        
+    }
     
     mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, mScreenWidth, 40)];
     mySearchBar.delegate = self;
@@ -83,62 +106,23 @@
     [self performSelector:@selector(addTipsViewWithView:) withObject:controller afterDelay:0.1];
 }
 
-- (void) searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
-{
-    self.tempSearchDisplayBackgroungView.hidden = YES;
-}
-
 - (void)addTipsViewWithView:(UISearchDisplayController*)controller
 {
     NSLog(@"subViews.count = %zd",controller.searchResultsTableView.superview.subviews.count);
     NSLog(@"superView %@",[controller.searchResultsTableView.superview class]);
     UIView *supV = controller.searchResultsTableView.superview;
     UIView *supsupV = supV.superview;
-    if (!self.tempSearchDisplayBackgroungView) {
-        self.tempSearchDisplayBackgroungView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, mScreenWidth, mScreenHeight)];
-        self.tempSearchDisplayBackgroungView.backgroundColor = [UIColor whiteColor];
-        self.tempSearchDisplayBackgroungView.tag = 99;
-        self.tempSearchDisplayBackgroungView.userInteractionEnabled = NO;
-        
-        NSString *tips = @"搜索更多的内容";
-        CGSize font = [tips sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20]}];
-        UILabel *labelTips = [[UILabel alloc] initWithFrame:CGRectMake((mScreenWidth-font.width)/2, 50, font.width, font.height)];
-        labelTips.font = [UIFont systemFontOfSize:20];
-        labelTips.text = tips;
-        labelTips.textColor = [UIColor colorWithWhite:0 alpha:0.5];
-        [self.tempSearchDisplayBackgroungView addSubview:labelTips];
-        
-        CALayer *line = [CALayer layer];
-        line.frame = CGRectMake(labelTips.frame.origin.x-30, labelTips.frame.origin.y+labelTips.frame.size.height+15, font.width+30*2, 0.5);
-        line.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2].CGColor;
-        line.opacity = 0.5;
-        [self.tempSearchDisplayBackgroungView.layer addSublayer:line];
-        
-    }
-    if (![supsupV viewWithTag:99]) {
-        [supsupV addSubview:self.tempSearchDisplayBackgroungView];
-    }
-}
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-{
-    if (searchBar.text.length) {
-        self.tempSearchDisplayBackgroungView.hidden = YES;
-    } else {
-        self.tempSearchDisplayBackgroungView.hidden = NO;
-        self.tempSearchDisplayBackgroungView.alpha = 0;
-        [UIView animateWithDuration:0.3 animations:^(){
-            self.tempSearchDisplayBackgroungView.alpha = 1;
-        }];
-    }
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    if (searchBar.text.length) {
-        self.tempSearchDisplayBackgroungView.hidden = YES;
-    } else {
-        self.tempSearchDisplayBackgroungView.hidden = NO;
+    
+    for (UIView *view in supsupV.subviews) {
+        for (UIView *sencondView in view.subviews) {
+            if ([sencondView isKindOfClass:[NSClassFromString(@"_UISearchDisplayControllerDimmingView") class]]) {
+                NSLog(@"_UISearchDisplayControllerDimmingView");
+                if (![sencondView viewWithTag:99]) {
+                    [sencondView addSubview:self.tempSearchDisplayBackgroungView];
+                }
+                sencondView.alpha = 1;
+            }
+        }
     }
 }
 

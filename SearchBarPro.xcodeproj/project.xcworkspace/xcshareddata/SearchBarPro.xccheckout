@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>77EC0B54-5C12-4800-97D5-410DB2CCF9BF</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SearchBarPro</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1A433B98C0A0FEAF8CF554BBE399E69D15B4CE58</key>
+		<string>https://github.com/lyroger/SearchBarPro.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SearchBarPro.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1A433B98C0A0FEAF8CF554BBE399E69D15B4CE58</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lyroger/SearchBarPro.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1A433B98C0A0FEAF8CF554BBE399E69D15B4CE58</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1A433B98C0A0FEAF8CF554BBE399E69D15B4CE58</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SearchBarPro</string>
+		</dict>
+	</array>
+</dict>
+</plist>
