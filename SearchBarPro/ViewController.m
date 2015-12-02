@@ -203,6 +203,9 @@
                 }
             }
         }
+    } else {
+        topLineLayer.hidden = NO;
+        bottomLayer.hidden = NO;
     }
 }
 
@@ -232,9 +235,6 @@
         bottomLayer.backgroundColor = GrayWhiteColor.CGColor;
         [searchBgView.layer addSublayer:bottomLayer];
     }
-    
-    topLineLayer.hidden = NO;
-    bottomLayer.hidden = NO;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
